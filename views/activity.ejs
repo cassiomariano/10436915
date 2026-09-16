@@ -1,0 +1,36 @@
+<%- include('partials/header') %>
+
+<main>
+  <h2>Interactive Game: Marine Creature Reveal</h2>
+  <p>Click the ocean squares below to uncover the marine creature hiding underneath!</p>
+
+  <div class="card" style="margin-top: 1rem; text-align: center;">
+    <div id="grid-container" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; max-width: 300px; margin: 1rem auto; background-color: var(--primary-blue); padding: 10px; border-radius: 8px;">
+      <div class="tile" style="background:#0d1b2a; height: 80px; border-radius: 4px; cursor: pointer;"></div>
+      <div class="tile" style="background:#0d1b2a; height: 80px; border-radius: 4px; cursor: pointer;"></div>
+      <div class="tile" style="background:#0d1b2a; height: 80px; border-radius: 4px; cursor: pointer;"></div>
+      <div class="tile" style="background:#0d1b2a; height: 80px; border-radius: 4px; cursor: pointer;"></div>
+      <div class="tile" style="background:#0d1b2a; height: 80px; border-radius: 4px; cursor: pointer;"></div>
+      <div class="tile" style="background:#0d1b2a; height: 80px; border-radius: 4px; cursor: pointer;"></div>
+    </div>
+    <p id="game-status" style="font-weight: bold; margin-top: 0.5rem;">Click tiles to reveal!</p>
+  </div>
+</main>
+
+<script>
+  const tiles = document.querySelectorAll('.tile');
+  let revealed = 0;
+  tiles.forEach((tile) => {
+    tile.addEventListener('click', () => {
+      if (tile.style.visibility !== 'hidden') {
+        tile.style.visibility = 'hidden';
+        revealed++;
+        if (revealed === tiles.length) {
+          document.getElementById('game-status').innerText = '🎉 You revealed the Pacific Octopus!';
+        }
+      }
+    });
+  });
+</script>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,21 @@
+<%- include('partials/header') %>
+
+<main>
+  <h2>Aquarium Zones & Exhibits</h2>
+  <div style="margin-top: 1rem;">
+    <% data.forEach(item => { %>
+      <div class="card">
+        <h3><%= item.zone_name %></h3>
+        <p><%= item.zone_desc %></p>
+        <% if (item.exhibit_name) { %>
+          <div style="margin-top: 0.75rem; padding-left: 1rem; border-left: 3px solid var(--primary-blue);">
+            <strong>Featured Exhibit:</strong> <%= item.exhibit_name %>
+            <p><%= item.exhibit_desc %></p>
+          </div>
+        <% } %>
+      </div>
+    <% }) %>
+  </div>
+</main>
+
+<%- include('partials/footer') %>
