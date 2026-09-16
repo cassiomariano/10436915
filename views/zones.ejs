@@ -1,20 +1,31 @@
 <%- include('partials/header') %>
 
 <main>
-  <h2>Aquarium Zones & Exhibits</h2>
-  <div style="margin-top: 1rem;">
-    <% data.forEach(item => { %>
+  <section class="zones-intro card" style="text-align: center;">
+    <h2>Explore Our Marine Zones</h2>
+    <p>Journey through four unique aquatic environments, home to hundreds of rare species and interactive exhibits.</p>
+  </section>
+
+  <div class="zones-grid" style="margin-top: 1.5rem;">
+    <% if (data && data.length > 0) { %>
+      <% data.forEach(item => { %>
+        <article class="card zone-card">
+          <h3 style="color: var(--primary-blue); font-size: 1.4rem;"><%= item.zone_name %></h3>
+          <p style="margin-top: 0.5rem;"><%= item.zone_desc %></p>
+          
+          <% if (item.exhibit_name) { %>
+            <div class="exhibit-box" style="margin-top: 1rem; padding: 0.75rem 1rem; background-color: var(--bg-light); border-left: 4px solid var(--accent-yellow); border-radius: 4px;">
+              <h4 style="color: var(--dark-navy); font-size: 1.1rem;">Featured Exhibit: <%= item.exhibit_name %></h4>
+              <p style="font-size: 0.95rem; margin-top: 0.25rem;"><%= item.exhibit_desc %></p>
+            </div>
+          <% } %>
+        </article>
+      <% }) %>
+    <% } else { %>
       <div class="card">
-        <h3><%= item.zone_name %></h3>
-        <p><%= item.zone_desc %></p>
-        <% if (item.exhibit_name) { %>
-          <div style="margin-top: 0.75rem; padding-left: 1rem; border-left: 3px solid var(--primary-blue);">
-            <strong>Featured Exhibit:</strong> <%= item.exhibit_name %>
-            <p><%= item.exhibit_desc %></p>
-          </div>
-        <% } %>
+        <p>No marine zones found in the database.</p>
       </div>
-    <% }) %>
+    <% } %>
   </div>
 </main>
 
