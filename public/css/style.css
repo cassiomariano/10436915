@@ -28,7 +28,7 @@ button { background-color: var(--primary-blue); color: #fff; border: none; paddi
 
 footer { text-align: center; padding: 1.5rem; background-color: var(--dark-navy); color: #fff; margin-top: 3rem; }
 
-/* Hero picture banner enhancements */
+/* Hero picture banner Enhancements */
 .hero-container {
   width: 100%;
   max-height: 420px;
