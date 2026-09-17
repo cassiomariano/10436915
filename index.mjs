@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
   res.render('index', { pageTitle: 'Home - TheAquarium World' });
 });
 
-// Marine Zones Route
+// Marine Zones Routes
 app.get('/zones', (req, res) => {
   const query = `
     SELECT 
@@ -49,14 +49,14 @@ app.get('/zones', (req, res) => {
       data: rows 
     });
   });
-});ß
+});
 
 app.get('/faq', (req, res) => {
   res.render('faq', { pageTitle: 'FAQ - The Aquarium World' });
 });
 
 app.get('/contact', (req, res) => {
-  res.render('contact', { pageTitle: 'Contact Us - Aquarium World' });
+  res.render('contact', { pageTitle: 'Contact Us - The Aquarium World' });
 });
 
 app.post('/contact', (req, res) => {
@@ -64,7 +64,7 @@ app.post('/contact', (req, res) => {
   const query = "INSERT INTO contact_submissions (name, email, message) VALUES (?, ?, ?)";
   db.run(query, [name, email, message], function(err) {
     if (err) return res.status(500).send("Error saving contact submission.");
-    res.render('contact-success', { pageTitle: 'Thank You - TheAquarium World' });
+    res.render('contact-success', { pageTitle: 'Thank You - The Aquarium World' });
   });
 });
 
