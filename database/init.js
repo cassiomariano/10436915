@@ -34,9 +34,9 @@ db.serialize(() => {
   db.get("SELECT COUNT(*) AS count FROM zones", (err, row) => {
     if (row && row.count === 0) {
       const stmtZone = db.prepare("INSERT INTO zones (name, description) VALUES (?, ?)");
-      stmtZone.run("Coral Reef Zone", "Vibrant shallow reefs featuring tropical fish and live coral displays.");
+      stmtZone.run("Coral Zone", "Vibrant shallow reefs featuring tropical fish and live coral displays.");
       stmtZone.run("Deep Sea Trench", "Explore mysterious creatures of the oceanic depths.");
-      stmtZone.run("Coastal Rockpools", "Interactive tide pool exhibits with starfish and sea anemones.");
+      stmtZone.run("Rockpools", "Interactive tide pool exhibits with starfish and sea anemones.");
       stmtZone.run("Freshwater Rivers", "Discover river giants, otters, and lush rainforest ecosystems.");
       stmtZone.finalize();
 

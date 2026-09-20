@@ -1,7 +1,10 @@
 :root {
   --primary-blue: #028cd1;
+
   --dark-navy: #1e6bbc;
   --accent-yellow: #fdd835;
+  
+  
   --bg-light: #f4f9fc;
   --text-dark: #0a0d12;
 }
@@ -11,9 +14,10 @@
 body { font-family: Arial, sans-serif; background-color: var(--bg-light); color: var(--text-dark); line-height: 1.6; }
 
 header { background-color: var(--dark-navy); color: #fff; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
-header h1 { font-size: 1.5rem; color: var(--accent-yellow); }
+header h1 { font-size: 2rem; color: var(--accent-yellow); }
 nav ul { display: flex; list-style: none; gap: 1.5rem; }
 nav a { color: #fff; text-decoration: none; font-weight: bold; }
+
 
 .opening-hours-bar { background-color: var(--accent-yellow); color: var(--dark-navy); text-align: center; padding: 0.75rem 1rem; font-size: 1.2rem; font-weight: bold; }
 .hero-container { width: 100%; max-height: 400px; overflow: hidden; background-color: var(--dark-navy); }
@@ -28,7 +32,7 @@ button { background-color: var(--primary-blue); color: #fff; border: none; paddi
 
 footer { text-align: center; padding: 1.5rem; background-color: var(--dark-navy); color: #fff; margin-top: 3rem; }
 
-/* Hero picture banner Enhancements */
+/* Phillip tshirt hero picture banner */
 .hero-container {
   width: 100%;
   max-height: 420px;
@@ -48,14 +52,14 @@ footer { text-align: center; padding: 1.5rem; background-color: var(--dark-navy)
   display: block;
 }
 
-/* Page intro and call to activity styling */
+/* page intro, call for activities styling */
 .welcome-card {
   text-align: center;
   padding: 2.5rem 1.5rem;
   background: #ffffff;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 .welcome-card h2 {
@@ -88,9 +92,9 @@ footer { text-align: center; padding: 1.5rem; background-color: var(--dark-navy)
 
 }
 
-/* Accessibility Focus Rings for Keyboard Navigation */
+/* Accessibility focus rings for Keyboard Navigation */
 a:focus-visible,
-button:focus-visible,
+button:focus-visible
 input:focus-visible,
 textarea:focus-visible,
 .tile:focus-visible {
@@ -98,7 +102,7 @@ textarea:focus-visible,
   outline-offset: 3px;
 }
 
-/* Screen Reader Only Utility Class */
+/* screen reader; for utility class */
 .sr-only {
   position: absolute;
   width: 1px;
