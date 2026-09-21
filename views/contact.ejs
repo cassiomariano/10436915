@@ -12,7 +12,12 @@
     <label for="message">Message:</label>
     <textarea id="message" name="message" rows="5" required></textarea>
 
-    <button type="submit">Send Message</button>
+    <form id="contact-form" action="/contact" method="POST" class="card" novalidate>
+  ...
+  <ul id="form-errors" class="form-errors" aria-live="polite"></ul>
+  <button type="submit">Send Message</button>
+</form>
+<script src="/js/contact.js"></script>
   </form>
 </main>
 

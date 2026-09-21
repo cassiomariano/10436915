@@ -21,6 +21,7 @@ nav a { color: #fff; text-decoration: none; font-weight: bold; }
 
 .opening-hours-bar { background-color: var(--accent-yellow); color: var(--dark-navy); text-align: center; padding: 0.75rem 1rem; font-size: 1.2rem; font-weight: bold; }
 .hero-container { width: 100%; max-height: 400px; overflow: hidden; background-color: var(--dark-navy); }
+/* Phillip tshirt hero picture banner */
 .hero-image { width: 100%; height: 400px; object-fit: cover; display: block; }
 
 main { max-width: 1000px; margin: 2rem auto; padding: 0 1rem; }
@@ -31,26 +32,6 @@ form input, form textarea { width: 100%; padding: 0.5rem; margin-top: 0.25rem; b
 button { background-color: var(--primary-blue); color: #fff; border: none; padding: 0.75rem 1.5rem; margin-top: 1rem; border-radius: 4px; cursor: pointer; }
 
 footer { text-align: center; padding: 1.5rem; background-color: var(--dark-navy); color: #fff; margin-top: 3rem; }
-
-/* Phillip tshirt hero picture banner */
-.hero-container {
-  width: 100%;
-  max-height: 420px;
-  overflow: hidden;
-  position: relative;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-
-
-.hero-image {
-  width: 100%;
-  height: 100%;
-  max-height: 420px;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-}
 
 /* page intro, call for activities styling */
 .welcome-card {
@@ -94,7 +75,7 @@ footer { text-align: center; padding: 1.5rem; background-color: var(--dark-navy)
 
 /* Accessibility focus rings for Keyboard Navigation */
 a:focus-visible,
-button:focus-visible
+button:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
 .tile:focus-visible {
@@ -113,4 +94,16 @@ textarea:focus-visible,
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+/* design for tablets and phones */
+@media (max-width: 768px) {
+  header { flex-direction: column; text-align: center; padding: 1rem; }
+  header h1 { font-size: 1.5rem; }
+  nav ul { flex-wrap: wrap; justify-content: center; gap: 0.75rem; }
+  .hero-image { height: 220px; }
+}
+
+/* show zones in two columns */
+@media (min-width: 769px) {
+  .zones-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
 }
