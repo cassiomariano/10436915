@@ -25,29 +25,36 @@ app.get('/', (req, res) => {
   res.render('index', { pageTitle: 'Home - TheAquarium World' });
 });
 
-// marine zones routes
+// marine zones routes with its exhibits from the database
 app.get('/zones', (req, res) => {
   const query = `
-    SELECT 
-      zones.id AS zone_id,
-      zones.name AS zone_name, 
-      zones.description AS zone_desc,
-      exhibits.name AS exhibit_name, 
-      exhibits.description AS exhibit_desc
+    SELECT zones.id AS zone_id, zones.name AS zone_name, zones.description AS zone_desc,
+           exhibits.name AS exhibit_name, exhibits.description AS exhibit_desc
     FROM zones
     LEFT JOIN exhibits ON zones.id = exhibits.zone_id
+    ORDER BY zones.id
   `;
 
   db.all(query, [], (err, rows) => {
     if (err) {
-      console.error("Database Query Error:", err.message);
+      console.error('Database query error:', err.message);
       return res.status(500).send('Sorry, the zones could not be loaded.');
     }
-    
-    res.render('zones', { 
-      pageTitle: 'Marine Zones - Aquarium World', 
-      data: rows 
+
+    // The join returns one row per exhibit, so group them under each zone
+    const zones = [];
+    rows.forEach(row => {
+      let zone = zones.find(z => z.id === row.zone_id);
+      if (!zone) {
+        zone = { id: row.zone_id, name: row.zone_name, description: row.zone_desc, exhibits: [] };
+        zones.push(zone);
+      }
+      if (row.exhibit_name) {
+        zone.exhibits.push({ name: row.exhibit_name, description: row.exhibit_desc });
+      }
     });
+
+    res.render('zones', { pageTitle: 'Marine Zones - Aquarium World', zones: zones });
   });
 });
 
