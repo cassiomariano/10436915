@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
+/* Using port 3000 as I'm a mac user*/
 const app = express();
 const PORT = 3000;
 
@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
   res.render('index', { pageTitle: 'Home - TheAquarium World' });
 });
 
-// Marine Zones Routes
+// marine zones routes
 app.get('/zones', (req, res) => {
   const query = `
     SELECT 
