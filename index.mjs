@@ -1,3 +1,5 @@
+// Aquarium World - start the website with: node index.mjs
+
 import express from 'express';
 import sqlite3 from 'sqlite3';
 import path from 'path';
@@ -5,27 +7,31 @@ import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-// Using port 3000 as I'm a mac user*/
+
 const app = express();
-const PORT = 3000;
+
+// The brief requires port 5000.
+// On a Mac, AirPlay uses port 5000, so for testing I run: PORT=3000 node index.mjs
+const PORT = process.env.PORT || 5000;
 
 const db = new sqlite3.Database('./database.db', (err) => {
-  if (err) console.error("Database error:", err.message);
-  else console.log("Connected to SQLite database.");
+  if (err) {
+    console.error('Database error:', err.message);
+  } else {
+    console.log('Connected to SQLite database.');
+  }
 });
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
-  res.render('index', { pageTitle: 'Home - TheAquarium World' });
+  res.render('index', { pageTitle: 'Home - Aquarium World' });
 });
 
-// marine zones routes with its exhibits from the database
 app.get('/zones', (req, res) => {
   const query = `
     SELECT zones.id AS zone_id, zones.name AS zone_name, zones.description AS zone_desc,
@@ -41,7 +47,7 @@ app.get('/zones', (req, res) => {
       return res.status(500).send('Sorry, the zones could not be loaded.');
     }
 
-    // The join returns one row per exhibit, so group them under each zones
+    // The join returns one row per exhibit, so group the exhibits under each zone
     const zones = [];
     rows.forEach(row => {
       let zone = zones.find(z => z.id === row.zone_id);
@@ -54,19 +60,22 @@ app.get('/zones', (req, res) => {
       }
     });
 
-    res.render('zones', { pageTitle: 'Marine Zones - Aquarium World', zones: zones });
+    res.render('zones', { pageTitle: 'Explore the Zones - Aquarium World', zones: zones });
   });
 });
 
+app.get('/activity', (req, res) => {
+  res.render('activity', { pageTitle: 'Deep Sea Game - Aquarium World' });
+});
+
 app.get('/faq', (req, res) => {
-  res.render('faq', { pageTitle: 'FAQ - The Aquarium World' });
+  res.render('faq', { pageTitle: 'Visitor FAQs - Aquarium World' });
 });
 
 app.get('/contact', (req, res) => {
-  res.render('contact', { pageTitle: 'Contact Us - The Aquarium World' });
+  res.render('contact', { pageTitle: 'Get in Touch - Aquarium World' });
 });
 
-// to handle the contact form submissions
 app.post('/contact', (req, res) => {
   // Server-side validation: never trust data from the browser alone
   const name = (req.body.name || '').trim();
@@ -77,8 +86,9 @@ app.post('/contact', (req, res) => {
     return res.status(400).send('Please go back and fill in all fields correctly.');
   }
 
-  // paramer query (?) prevents SQL injection
+  // Parameterised query (the ? marks) prevents SQL injection
   const query = 'INSERT INTO contact_submissions (name, email, message) VALUES (?, ?, ?)';
+
   db.run(query, [name, email, message], function (err) {
     if (err) {
       console.error('Insert error:', err.message);
@@ -86,10 +96,6 @@ app.post('/contact', (req, res) => {
     }
     res.render('contact-success', { pageTitle: 'Thank You - Aquarium World' });
   });
-});
-
-app.get('/activity', (req, res) => {
-  res.render('activity', { pageTitle: 'Marine Reveal Game - Aquarium World' });
 });
 
 app.listen(PORT, () => {
