@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-/* Using port 3000 as I'm a mac user*/
+// Using port 3000 as I'm a mac user*/
 const app = express();
 const PORT = 3000;
 
@@ -41,7 +41,7 @@ app.get('/zones', (req, res) => {
   db.all(query, [], (err, rows) => {
     if (err) {
       console.error("Database Query Error:", err.message);
-      return res.status(500).send("Database Error: " + err.message);
+      return res.status(500).send('Sorry, the zones could not be loaded.');
     }
     
     res.render('zones', { 
@@ -59,12 +59,25 @@ app.get('/contact', (req, res) => {
   res.render('contact', { pageTitle: 'Contact Us - The Aquarium World' });
 });
 
+// Handle contact form submissions
 app.post('/contact', (req, res) => {
-  const { name, email, message } = req.body;
-  const query = "INSERT INTO contact_submissions (name, email, message) VALUES (?, ?, ?)";
-  db.run(query, [name, email, message], function(err) {
-    if (err) return res.status(500).send("Error saving contact submission.");
-    res.render('contact-success', { pageTitle: 'Thank You - The Aquarium World' });
+  // Server-side validation: never trust data from the browser alone
+  const name = (req.body.name || '').trim();
+  const email = (req.body.email || '').trim();
+  const message = (req.body.message || '').trim();
+
+  if (name.length < 2 || !email.includes('@') || message.length < 10) {
+    return res.status(400).send('Please go back and fill in all fields correctly.');
+  }
+
+  // Parameterised query (?) prevents SQL injection
+  const query = 'INSERT INTO contact_submissions (name, email, message) VALUES (?, ?, ?)';
+  db.run(query, [name, email, message], function (err) {
+    if (err) {
+      console.error('Insert error:', err.message);
+      return res.status(500).send('Sorry, your message could not be saved.');
+    }
+    res.render('contact-success', { pageTitle: 'Thank You - Aquarium World' });
   });
 });
 
