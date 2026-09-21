@@ -1,36 +1,38 @@
 <%- include('partials/header') %>
 
 <main>
-  <section class="welcome-card" style="margin-bottom: 2rem;">
+  <section class="welcome-card">
     <h2>Explore Our Marine Zones</h2>
-    <p>Discover diverse oceanic ecosystems, from vibrant shallow coral reefs to the mysteries of the deep sea trenches.</p>
+    <p>Discover diverse ocean habitats, from vibrant shallow coral reefs to the mysteries of the deep sea trenches.</p>
   </section>
 
-  <% if (data && data.length > 0) { %>
+  <% if (zones.length > 0) { %>
     <div class="zones-grid">
-      <% data.forEach(item => { %>
+      <!-- One card per zone, with its exhibits listed inside -->
+      <% zones.forEach(zone => { %>
         <article class="card">
-          <h3 style="color: var(--primary-blue); font-size: 1.4rem; margin-bottom: 0.5rem;">
-            <%= item.zone_name %>
-          </h3>
-          
-          <p style="margin-bottom: 1rem;"><%= item.zone_desc %></p>
-          
-          <% if (item.exhibit_name) { %>
-            <div style="background-color: var(--bg-light); padding: 1rem; border-left: 4px solid var(--accent-yellow); border-radius: 4px;">
-              <strong style="color: var(--dark-navy);">Featured Exhibit: <%= item.exhibit_name %></strong>
-              <p style="font-size: 0.95rem; margin-top: 0.25rem;"><%= item.exhibit_desc %></p>
-            </div>
+          <h3 class="zone-title"><%= zone.name %></h3>
+          <p><%= zone.description %></p>
+
+          <% if (zone.exhibits.length > 0) { %>
+            <h4 class="exhibits-heading">Exhibits and experiences</h4>
+            <ul class="exhibit-list">
+              <% zone.exhibits.forEach(exhibit => { %>
+                <li class="exhibit">
+                  <strong><%= exhibit.name %></strong>
+                  <p><%= exhibit.description %></p>
+                </li>
+              <% }) %>
+            </ul>
           <% } %>
         </article>
       <% }) %>
     </div>
   <% } else { %>
-    <div class="card" style="text-align: center;">
-      <p>No zones found in the database. Please run <code>node database/init.js</code> in your terminal.</p>
+    <div class="card">
+      <p>Our zones are being prepared. Please check back soon.</p>
     </div>
   <% } %>
-  
 </main>
 
 <%- include('partials/footer') %>

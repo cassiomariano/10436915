@@ -1,17 +1,19 @@
 :root {
   --primary-blue: #028cd1;
-
   --dark-navy: #1e6bbc;
   --accent-yellow: #fdd835;
-  
-  
   --bg-light: #f4f9fc;
   --text-dark: #0a0d12;
 }
 
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: Arial, sans-serif; background-color: var(--bg-light); color: var(--text-dark); line-height: 1.6; }
+body { 
+  font-family: Arial, sans-serif; 
+  background-color: var(--bg-light); 
+  color: var(--text-dark); 
+  line-height: 1.6; 
+}
 
 header { background-color: var(--dark-navy); color: #fff; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
 header h1 { font-size: 2rem; color: var(--accent-yellow); }
@@ -108,3 +110,15 @@ textarea:focus-visible,
 @media (min-width: 769px) {
   .zones-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
 }
+/* on the zones page */
+.zone-title { color: var(--primary-blue); font-size: 1.4rem; margin-bottom: 0.5rem; }
+.exhibits-heading { margin-top: 1rem; color: var(--dark-navy); }
+.exhibit-list { list-style: none; }
+.exhibit {
+  background-color: var(--bg-light);
+  padding: 1rem;
+  margin-top: 0.75rem;
+  border-left: 4px solid var(--accent-yellow);
+  border-radius: 4px;
+}
+.exhibit p { font-size: 0.95rem; margin-top: 0.25rem; }
