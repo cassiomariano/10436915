@@ -1,95 +1,35 @@
 <%- include('partials/header') %>
+
 <main>
-  <section class="welcome-card" style="text-align: center; margin-bottom: 0.5rem;">
-    <h2>Let's Play!</h2>
-    <h2>See what's is hiding in the deep sea</h2>
-    <p>Click on the deep-sea tiles below to clear the grid and reveal the mystery ocean inhabitant!</p>
+  <section class="welcome-card">
+    <h2>Deep Sea Mystery</h2>
+    <p>Something is hiding in our Deep Sea Trench! Click the tiles to reveal the creature. Can you guess what it is before the last tile disappears?</p>
   </section>
 
-  <div class="card" style="max-width: 500px; margin: 0 auto; text-align: center;">
-    <!-- main game board = revealed sea creature -->
-<div id="game-board" style="position: relative; width: 300px; height: 300px; margin: 0 auto; background: url('/images/oceancreature-background.jpg') center/cover no-repeat; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">      
-      <!-- Accessible 3x3 Tile Grid -->
-<div id="grid-container" style="display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr); width: 100%; height: 100%;">
-  <div class="tile" role="button" tabindex="0" aria-label="Marine Tile 1" style="--tile-img: url('/images/tile1.jpg');"></div>
-  <div class="tile" role="button" tabindex="0" aria-label="Marine Tile 2" style="--tile-img: url('/images/tile2.jpg');"></div>
-  <div class="tile" role="button" tabindex="0" aria-label="Marine Tile 3" style="--tile-img: url('/images/tile3.jpg');"></div>
-  <div class="tile" role="button" tabindex="0" aria-label="Marine Tile 4" style="--tile-img: url('/images/tile4.jpg');"></div>
-  <div class="tile" role="button" tabindex="0" aria-label="Marine Tile 5" style="--tile-img: url('/images/tile5.jpg');"></div>
-  <div class="tile" role="button" tabindex="0" aria-label="Marine Tile 6" style="--tile-img: url('/images/tile6.jpg');"></div>
-  <div class="tile" role="button" tabindex="0" aria-label="Marine Tile 7" style="--tile-img: url('/images/tile7.jpg');"></div>
-  <div class="tile" role="button" tabindex="0" aria-label="Marine Tile 8" style="--tile-img: url('/images/tile8.jpg');"></div>
-  <div class="tile" role="button" tabindex="0" aria-label="Marine Tile 9" style="--tile-img: url('/images/tile9.jpg');"></div>
-</div>
+  <div class="card game-card">
+    <!-- The creature picture, with the tiles on top of it -->
+    <div class="game-board">
+      <img src="/images/sea-creature.jpeg" alt="A deep-sea creature hidden behind tiles">
 
+      <div class="tile-grid">
+        <button class="tile" aria-label="Tile 1"></button>
+        <button class="tile" aria-label="Tile 2"></button>
+        <button class="tile" aria-label="Tile 3"></button>
+        <button class="tile" aria-label="Tile 4"></button>
+        <button class="tile" aria-label="Tile 5"></button>
+        <button class="tile" aria-label="Tile 6"></button>
+        <button class="tile" aria-label="Tile 7"></button>
+        <button class="tile" aria-label="Tile 8"></button>
+        <button class="tile" aria-label="Tile 9"></button>
+      </div>
     </div>
 
-    <div style="margin-top: 1.5rem;">
-      <p id="game-status" style="font-weight: bold; font-size: 1.1rem; color: var(--dark-navy);">Tiles Remaining: <span id="counter">9</span></p>
-      <button id="reset-btn" style="margin-top: 1rem; display: none;">Play Again</button>
-    </div>
+    <p class="game-status">Tiles remaining: <span id="counter">9</span></p>
+    <p id="win-message" aria-live="polite"></p>
+    <button id="reset-btn">Play Again</button>
   </div>
 </main>
 
-<style>
-  /* Styling for individual surface tiles */
-  .tile {
-    background-image: var(--tile-img);
-    background-size: cover;
-    background-position: center;
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    cursor: pointer;
-    transition: opacity 0.4s ease, transform 0.2s ease;
-  }
-
-  .tile:hover {
-    transform: scale(0.98);
-    filter: brightness(1.1);
-  }
-</style>
-
-<script>
-  const tiles = document.querySelectorAll('.tile');
-  const counterEl = document.getElementById('counter');
-  const statusEl = document.getElementById('game-status');
-  const resetBtn = document.getElementById('reset-btn');
-  let remaining = tiles.length;
-
-  tiles.forEach(tile => {
-    tile.addEventListener('click', function handleTileClick() {
-      if (this.style.opacity !== '0') {
-        this.style.opacity = '0';
-        this.style.pointerEvents = 'none';
-        remaining--;
-        counterEl.textContent = remaining;
-
-        if (remaining === 0) {
-          statusEl.innerHTML = '🎉 <strong>Congratulations! You uncovered the exhibit image!</strong>';
-          resetBtn.style.display = 'inline-block';
-        }
-      }
-    });
-  });
-tiles.forEach(tile => {
-  // Allow interaction via Enter or Space key
-  tile.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      tile.click();
-    }
-  });
-});
-
-  resetBtn.addEventListener('click', () => {
-    remaining = tiles.length;
-    counterEl.textContent = remaining;
-    statusEl.innerHTML = 'Tiles Remaining: <span id="counter">9</span>';
-    resetBtn.style.display = 'none';
-    tiles.forEach(tile => {
-      tile.style.opacity = '1';
-      tile.style.pointerEvents = 'auto';
-    });
-  });
-</script>
+<script src="/js/activity.js"></script>
 
 <%- include('partials/footer') %>

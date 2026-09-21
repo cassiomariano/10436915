@@ -41,7 +41,7 @@ app.get('/zones', (req, res) => {
       return res.status(500).send('Sorry, the zones could not be loaded.');
     }
 
-    // The join returns one row per exhibit, so group them under each zone
+    // The join returns one row per exhibit, so group them under each zones
     const zones = [];
     rows.forEach(row => {
       let zone = zones.find(z => z.id === row.zone_id);
@@ -66,7 +66,7 @@ app.get('/contact', (req, res) => {
   res.render('contact', { pageTitle: 'Contact Us - The Aquarium World' });
 });
 
-// Handle contact form submissions
+// to handle the contact form submissions
 app.post('/contact', (req, res) => {
   // Server-side validation: never trust data from the browser alone
   const name = (req.body.name || '').trim();
@@ -77,7 +77,7 @@ app.post('/contact', (req, res) => {
     return res.status(400).send('Please go back and fill in all fields correctly.');
   }
 
-  // Parameterised query (?) prevents SQL injection
+  // paramer query (?) prevents SQL injection
   const query = 'INSERT INTO contact_submissions (name, email, message) VALUES (?, ?, ?)';
   db.run(query, [name, email, message], function (err) {
     if (err) {

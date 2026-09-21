@@ -122,3 +122,30 @@ textarea:focus-visible,
   border-radius: 4px;
 }
 .exhibit p { font-size: 0.95rem; margin-top: 0.25rem; }
+
+/* ===== Activity page ===== */
+.game-card { max-width: 500px; margin: 0 auto; text-align: center; }
+
+.game-board { position: relative; width: 300px; height: 300px; margin: 0 auto; }
+
+.game-board img { width: 300px; height: 300px; object-fit: cover; border-radius: 8px; }
+
+/* Places the 3x3 grid of tiles on top of the picture */
+.tile-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 300px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.tile { margin: 0; padding: 0; border-radius: 0; border: 1px solid #ffffff; background-color: var(--dark-navy); }
+.tile:hover { background-color: var(--primary-blue); }
+
+.game-status { margin-top: 1rem; font-weight: bold; }
+
+/* Hidden until the game is won */
+#reset-btn { display: none; }
