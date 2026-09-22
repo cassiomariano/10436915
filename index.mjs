@@ -10,9 +10,7 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 
-// The brief requires port 5000.
-// On a Mac, AirPlay uses port 5000, so for testing I run: PORT=3000 node index.mjs
-const PORT = process.env.PORT || 5000;
+const PORT = 5000; // port required by the brief
 
 const db = new sqlite3.Database('./database.db', (err) => {
   if (err) {
