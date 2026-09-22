@@ -140,3 +140,8 @@ textarea:focus-visible,
 
 /* Hidden until the game is won */
 #reset-btn { display: none; }
+
+/* smaller game board for small phones */
+@media (max-width: 400px) {
+  .game-board, .game-board img, .tile-grid { width: 240px; height: 240px; }
+}
