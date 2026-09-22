@@ -38,7 +38,7 @@ button { background-color: var(--primary-blue); color: #fff; border: none; paddi
 
 footer { text-align: center; padding: 1.5rem; background-color: var(--dark-navy); color: #fff; margin-top: 3rem; }
 
-/* page intro, call for activities styling */
+/* welcome box at the top of the page */
 .welcome-card {
   text-align: center;
   padding: 2.5rem 1.5rem;
@@ -88,18 +88,6 @@ textarea:focus-visible,
   outline-offset: 3px;
 }
 
-/* screen reader; for utility class */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
 /* design for tablets and phones */
 @media (max-width: 768px) {
   header { flex-direction: column; text-align: center; padding: 1rem; }
@@ -112,7 +100,7 @@ textarea:focus-visible,
 @media (min-width: 769px) {
   .zones-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
 }
-/* on the zones page */
+/*the zones page */
 .zone-image { width: 100%; height: 200px; object-fit: cover; border-radius: 6px; margin-bottom: 1rem; }
 .zone-title { color: var(--primary-blue); font-size: 1.4rem; margin-bottom: 0.5rem; }
 .exhibits-heading { margin-top: 1rem; color: var(--dark-navy); }
@@ -126,14 +114,14 @@ textarea:focus-visible,
 }
 .exhibit p { font-size: 0.95rem; margin-top: 0.25rem; }
 
-/* ===== Activity page ===== */
+/* activity page  */
 .game-card { max-width: 500px; margin: 0 auto; text-align: center; }
 
 .game-board { position: relative; width: 300px; height: 300px; margin: 0 auto; }
 
 .game-board img { width: 300px; height: 300px; object-fit: cover; border-radius: 8px; }
 
-/* Places the 3x3 grid of tiles on top of the picture */
+/* places the 3x3 grid of tiles on top of the Picture */
 .tile-grid {
   position: absolute;
   top: 0;

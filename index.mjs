@@ -1,4 +1,4 @@
-// Aquarium World - start the website with: node index.mjs
+// aquArium World - start the website with: node index.mjs
 
 import express from 'express';
 import sqlite3 from 'sqlite3';
@@ -46,7 +46,7 @@ app.get('/zones', (req, res) => {
       return res.status(500).send('Sorry, the zones could not be loaded.');
     }
 
-    // the join returns one row per exhibit zone and group the exhibits under each zones
+    // one row comes back for each exhibit, so group the exhibit under hteir zone
     const zones = [];
     rows.forEach(row => {
       let zone = zones.find(z => z.id === row.zone_id);
@@ -83,7 +83,7 @@ app.get('/contact', (req, res) => {
 });
 
 app.post('/contact', (req, res) => {
-  // Server-side validation: never trust data from the browser alone
+  // the server-side validation: never trust data from the browser alone
   const name = (req.body.name || '').trim();
   const email = (req.body.email || '').trim();
   const message = (req.body.message || '').trim();
@@ -92,7 +92,7 @@ app.post('/contact', (req, res) => {
     return res.status(400).send('Please go back and fill in all fields correctly.');
   }
 
-  // Parameterised query (the ? marks) prevents SQL injection
+  // parameterised query (the ? marks) prevents SQL injection
   const query = 'INSERT INTO contact_submissions (name, email, message) VALUES (?, ?, ?)';
 
   db.run(query, [name, email, message], function (err) {

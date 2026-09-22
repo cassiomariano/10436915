@@ -2,13 +2,14 @@
 
 <main>
   <section class="welcome-card">
-    <h2>Explore Our Marine Zones</h2>
+    <h2>Explore the Zones</h2>
     <p>Discover diverse ocean habitats, from vibrant shallow coral reefs to the mysteries of the deep sea trenches.</p>
   </section>
 
   <% if (zones.length > 0) { %>
     <div class="zones-grid">
-      <!-- added one card per zone, with its exhibits and theme listed inside -->
+
+      <!-- one card per zone, with its exhibits and theme listed inside -->
       <% zones.forEach(zone => { %>
         <article class="card">
           <img src="/images/<%= zone.image %>" alt="<%= zone.imageAlt %>" class="zone-image">

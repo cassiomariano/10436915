@@ -1,7 +1,6 @@
 // Deep Sea Mystery game
 // Click a tile to hide it. When all tiles are gone, the creature is revealed.
 
-// Get the parts of the page we need
 const tiles = document.querySelectorAll('.tile');
 const counter = document.getElementById('counter');
 const winMessage = document.getElementById('win-message');
