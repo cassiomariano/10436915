@@ -11,7 +11,7 @@ const __dirname = path.dirname(__filename);
 const app = express();
 
 const PORT = 5000; // port required by the brief
-
+// connect to database
 const db = new sqlite3.Database('./database.db', (err) => {
   if (err) {
     console.error('Database error:', err.message);
@@ -26,6 +26,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+// main route 
 app.get('/', (req, res) => {
   res.render('index', { pageTitle: 'Home - Aquarium World' });
 });
@@ -81,9 +82,9 @@ app.get('/faq', (req, res) => {
 app.get('/contact', (req, res) => {
   res.render('contact', { pageTitle: 'Get in Touch - Aquarium World' });
 });
-
+// contact form submission
 app.post('/contact', (req, res) => {
-  // the server-side validation: never trust data from the browser alone
+  
   const name = (req.body.name || '').trim();
   const email = (req.body.email || '').trim();
   const message = (req.body.message || '').trim();
