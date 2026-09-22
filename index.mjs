@@ -31,8 +31,9 @@ app.get('/', (req, res) => {
 });
 
 app.get('/zones', (req, res) => {
-  const query = `
+    const query = `
     SELECT zones.id AS zone_id, zones.name AS zone_name, zones.description AS zone_desc,
+           zones.image AS zone_image, zones.image_alt AS zone_image_alt,
            exhibits.name AS exhibit_name, exhibits.description AS exhibit_desc
     FROM zones
     LEFT JOIN exhibits ON zones.id = exhibits.zone_id
@@ -45,12 +46,19 @@ app.get('/zones', (req, res) => {
       return res.status(500).send('Sorry, the zones could not be loaded.');
     }
 
-    // The join returns one row per exhibit, so group the exhibits under each zone
+    // the join returns one row per exhibit zone and group the exhibits under each zones
     const zones = [];
     rows.forEach(row => {
       let zone = zones.find(z => z.id === row.zone_id);
       if (!zone) {
-        zone = { id: row.zone_id, name: row.zone_name, description: row.zone_desc, exhibits: [] };
+        zone = {
+          id: row.zone_id,
+          name: row.zone_name,
+          description: row.zone_desc,
+          image: row.zone_image,
+          imageAlt: row.zone_image_alt,
+          exhibits: []
+        };
         zones.push(zone);
       }
       if (row.exhibit_name) {

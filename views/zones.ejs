@@ -8,9 +8,10 @@
 
   <% if (zones.length > 0) { %>
     <div class="zones-grid">
-      <!-- One card per zone, with its exhibits listed inside -->
+      <!-- added one card per zone, with its exhibits and theme listed inside -->
       <% zones.forEach(zone => { %>
         <article class="card">
+          <img src="/images/<%= zone.image %>" alt="<%= zone.imageAlt %>" class="zone-image">
           <h3 class="zone-title"><%= zone.name %></h3>
           <p><%= zone.description %></p>
 

@@ -1,5 +1,5 @@
-// Creates the database tables and fills them with starting data.
-// Run once from the project root with: node database/init.js
+// Creat the db tables to fills them with starting data.
+
 import sqlite3 from 'sqlite3';
 
 const db = new sqlite3.Database('./database.db');
@@ -10,7 +10,9 @@ db.serialize(() => {
     CREATE TABLE IF NOT EXISTS zones (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT NOT NULL,
-      description TEXT NOT NULL
+      description TEXT NOT NULL,
+      image TEXT NOT NULL,
+      image_alt TEXT NOT NULL
     )
   `);
 
@@ -47,11 +49,11 @@ db.serialize(() => {
       return;
     }
 
-    const addZone = db.prepare('INSERT INTO zones (name, description) VALUES (?, ?)');
-    addZone.run('Coral Zone', 'Vibrant shallow reefs featuring tropical fish and live coral displays.');
-    addZone.run('Deep Sea Trench', 'Explore the mysterious creatures of the ocean depths.');
-    addZone.run('Rockpools', 'Interactive tide pool exhibits with starfish and sea anemones.');
-    addZone.run('Freshwater Rivers', 'Discover river giants, otters and lush rainforest ecosystems.');
+    const addZone = db.prepare('INSERT INTO zones (name, description, image, image_alt) VALUES (?, ?, ?, ?)');
+    addZone.run('Coral Zone', 'Vibrant shallow reefs featuring tropical fish and live coral displays.', 'coral.jpg', 'Colourful tropical fish swimming around a coral reef');
+    addZone.run('Deep Sea Trench', 'Explore the mysterious creatures of the ocean depths.', 'deep-sea.jpg', 'Glowing jellyfish drifting in dark water');
+    addZone.run('Rockpools', 'Interactive tide pool exhibits with starfish and sea anemones.', 'rockpools.jpg', 'Starfish and anemones in a shallow rockpool');
+    addZone.run('Freshwater Rivers', 'Discover river giants, otters and lush rainforest ecosystems.', 'freshwater.jpg', 'An otter swimming in a clear river');
     addZone.finalize();
 
     // zone_id: 1 = Coral, 2 = Deep Sea, 3 = Rockpools, 4 = Freshwater
