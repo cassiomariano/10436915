@@ -1,4 +1,5 @@
-// client-side validation for the contact form. check the fields before the form is sent to the server.
+// contact forms validation.
+
 const form = document.getElementById('contact-form');
 const errorList = document.getElementById('form-errors');
 
@@ -7,7 +8,7 @@ form.addEventListener('submit', function (event) {
   const email = document.getElementById('email').value.trim();
   const message = document.getElementById('message').value.trim();
   const errors = [];
-
+// check name
   if (name.length < 2) {
     errors.push('Please enter your name (at least 2 characters).');
   }
